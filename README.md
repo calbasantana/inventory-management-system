@@ -14,7 +14,7 @@ In the new Google Sheet, go over to Extensions -> Apps Script. Here, copy and pa
 
 ![Image_3](https://github.com/user-attachments/assets/97436720-612c-4dd2-a9f4-5bb17853798f)
 
-Review the permissions and advance. We still need to add sevral more files. Create the following files and keep them empty for now:
+Review the permissions and advance. We still need to add several more files. Create the following files and keep them empty for now:
 1. adduser.html
 2. deleteuser.html
 3. addnewitems.html
