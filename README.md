@@ -7,9 +7,13 @@ As a result, I created a spreadsheet on Google Sheets that has an embedded Graph
 I do recommend having a separate computer with a touchscreen, such as a Raspberry Pi, to run the Google Sheet and connect the barcode scanner to.
 # Setting Up
 The first thing you need to do to set up the sheet is to download the Complete Inventory System sheet. Then, upload the sheet to Google Drive and open it. Unfortunately, there's still an additional step here and that is to click on File -> Save as Google Sheets; otherwise, the following options do not show.
+
 ![Image_2](https://github.com/user-attachments/assets/26f97cc5-d1bf-40f1-abb7-f4c4d1627a4d)
+
 In the new Google Sheet, go over to Extensions -> Apps Script. Here, copy and paste the Code.gs file contents into your Code.gs. Press "Save to Drive" then "Run." You will be greeted with this screen:
+
 ![Image_3](https://github.com/user-attachments/assets/97436720-612c-4dd2-a9f4-5bb17853798f)
+
 Review the permissions and advance. We still need to add sevral more files. Create the following files and keep them empty for now:
 1. adduser.html
 2. deleteuser.html
@@ -17,6 +21,7 @@ Review the permissions and advance. We still need to add sevral more files. Crea
 4. removeitems.html
 5. returnitems.html
 6. deleteitems.html
+
 ![Image_4](https://github.com/user-attachments/assets/00ed714f-f6d7-4c13-9a48-982a90a1a4ac)
 
 Once you have created these, add contents of each corresponding file by copying and pasting it from the files here. Make sure to save all the files in the Apps Script.
