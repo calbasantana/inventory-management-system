@@ -9,9 +9,9 @@ I do recommend having a separate computer with a touchscreen, such as a Raspberr
 # Setting Up
 The first thing you need to do to set up the sheet is to download the Complete Inventory System sheet. Then, upload the sheet to Google Drive and open it. Unfortunately, there's still an additional step here and that is to click on File -> Save as Google Sheets; otherwise, the following options do not show.
 
-![Image_2](https://github.com/user-attachments/assets/26f97cc5-d1bf-40f1-abb7-f4c4d1627a4d)
+![Image_2](https://github.com/user-attachments/assets/36bdad4b-0951-4ea5-8e1d-989df6cb6693)
 
-In the new Google Sheet, go over to Extensions -> Apps Script. Here, copy and paste the Code.gs file contents into your Code.gs. Press "Save to Drive" then "Run." You will be greeted with this screen:
+In the new Google Sheet, go over to Extensions -> Apps Script. Here, copy and paste the Code.js file contents into your Code.gs. Press "Save to Drive" then "Run." You will be greeted with this screen:
 
 ![Image_3](https://github.com/user-attachments/assets/97436720-612c-4dd2-a9f4-5bb17853798f)
 
