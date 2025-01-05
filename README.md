@@ -3,7 +3,9 @@
 # Introduction
 This project came about as a means of trying to solve an issue within the physics and chemistry departments at my high school; namely, the issue of inventory management. We often have a large array of tools that are difficult to track when teachers are taking them from a central location, such as the physics closet or the chemicals storage supply closet of the chemistry department.
 
-As a result, I created a spreadsheet on Google Sheets that has an embedded Graphical User Interface (GUI) and uses a barcode scanner to check in and check out items. What follows is a tutorial of the main features of the Google Sheet.
+As a result, I created a spreadsheet on Google Sheets that has an embedded Graphical User Interface (GUI) and uses a barcode scanner to check in and check out items. As I worked on this, I was met with a lot of difficult hurdles, so I relied on AI to help me go through some of those hurdles.
+
+What follows is a tutorial of the main features of the Google Sheet.
 
 I do recommend having a separate computer with a touchscreen, such as a Raspberry Pi, to run the Google Sheet and connect the barcode scanner to.
 # Setting Up
