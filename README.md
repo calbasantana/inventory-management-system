@@ -27,51 +27,77 @@ Review the permissions and advance. We still need to add several more files. Cre
 Once you have created these, add contents of each corresponding file by copying and pasting it from the files here. Make sure to save all the files in the Apps Script.
 
 Now, go back to the Interface page. Click on the top right of each of the six tools and assign the appropriate script (please note, the appropriate scripts are showremoveitems, showaddnewitems, showreturnitems, showdeleteitem, showaddnewuser, and showdeleteuser - since these are GUI versions, I put "show" in front).
+
 ![Image_5](https://github.com/user-attachments/assets/d8bf93c0-b279-4d93-bbcb-e8f5379f119b)
 
+As an example, for Return Item(s), I did the following:
 
+![Image_6](https://github.com/user-attachments/assets/8b7e744a-f1a6-4b1d-9ef1-61dd2b7bf2d1)
 
-7. 
-# 3D-Printed Inverter Magnet (Magnets Holder)
-![Image_2](https://github.com/user-attachments/assets/70fda216-17b3-48f9-8678-9de0781e7feb)
-The design I settled on utilizes one interior magnet alongside ten exterior magnets. I designed it on OnShape and then proceeded to print it using my Original Prusa Mini+ and using PrusaSlicer.
-# Specifications & Material(s)
-Below you can find the printer and material used.
-## 3D Printer
- Original Prusa Mini+
-## Material(s)
-INLAND PLA 3D Printer Filament - 3D Printing PLA Filament 1.75mm, Dimensional Accuracy +/- 0.03mm - 1kg Cardboard Spool (2.2 lbs), Marble PLA
- – this can be purchased for $29.99 at the following link:
-https://www.amazon.com/Inland-1-75mm-Marble-Printer-Filament/dp/B08M4733VV/ref=sr_1_3?crid=RY0788Z9D3XL&dib=eyJ2IjoiMSJ9.GvDUjGeacdaThMoKB2T31ewH9i3JmlLfhoDydChHBm-pD7cXPBEVjrKUewiIA1ZLE0_09V1n0PRn75b7hFqiDw4M0-lnl6NiRKwU4Bay_UQglrp8aVfnSITNRxxnTlk00zi7jk9JMRR5mzHilVguVNlu22jSBhxaIA2Mgu28qpM98QySMqZ0onKGj8rI2Ae99hyhSl7nTwlWuBccngRzfk5tlxoLLDb3Ck8adz-NTaQ.5vcyT03Wl1FkUx1DENvwhSOMvdqbl_TQCjXICAq7kSI&dib_tag=se&keywords=pla+filament+inland+marble&qid=1735843633&sprefix=pla+filament+inland+marble%2Caps%2C87&sr=8-3
-# Software
- PrusaSlicer
-![Image_3](https://github.com/user-attachments/assets/1701ac93-f0d4-4695-80bd-659dac15fa1f)
-## Settings
-  Layer Height: .2mm \
-  Infill: 50% \
-  Supports: None \
-  Estimated Printing Time: 1 hour and 17 minutes
-# Magnets - Arrangement and Material(s)
-This is the most important part because wrongfully attaching magnets will cause issues with the magnetic field and thereby making the “tractor beam” effect null.
-## Magnets Arrangement
-To make this inverter work, we need two sets of “magnets”. The first is made up of two 20mm diameter, 3mm thickness neodymium magnets stacked on top of each other, like so:
-![Image_4](https://github.com/user-attachments/assets/0fdad79c-7cc3-4215-baeb-50a942235f72)
-The second is for the 3D printed part. Take 4 5mm diameter, 1 mm thickness magnets, stacked on top of each other, and make sure they repel the two large magnets. Create ten sets of these and insert them into the 3D-printed part like so:
-![Image_5](https://github.com/user-attachments/assets/7727e89c-4e56-4da6-afcf-5922a629d18e)
-After doing this, take another 20mm diameter, 3mm thickness magnet and make sure it attracts the two 20mm diameter, 3mm thickness magnets stacked on top of each other. Place three 12mm diameter, 2mm thickness neodymium magnets atop the center of the first 20mm diameter, 3 mm thickness magnet, followed by two 10mm diameter, 2mm thickness neodymium magnets on top as well. Push this into the 3D-printed part.
+Now, when you click one of the six buttons, you should be able to engage the script.
 
-Congratulations, you now have a fully-assembled inverter magnet! Time to test it! Hopefully you will see something like this:
+#Tabs
+There are four tabs in total: Interface, Items, Users, and ActivityLog. Each tab is pretty self-explanatory.
 
-https://github.com/user-attachments/assets/49302779-e3c6-465c-8665-3d15ed1d7994
-## Material(s)
-20x3mm Strong Neodymium Magnet, 25Pcs – this can be purchased for $13.99 at the following link:
-https://www.amazon.com/gp/product/B0CJ33WWZ9/ref=ppx_yo_dt_b_search_asin_title?ie=UTF8&psc=1
+##Interface
 
-500 Pieces Small Magnets, Small Magnets Rare Earth Magnets Tiny Neodymium Disc Magnets – this can be purchased for $11.97 at the following link: https://www.amazon.com/gp/product/B0BWD7H7Z9/ref=ppx_yo_dt_b_search_asin_title?ie=UTF8&psc=1
+The interface is where you should spend most of the time and where your screen should be by default for users. From here, you can either click using a touchscreen (if your device allows for it) or use a mouse. You will see the options on the left for engaging with the inventory management system and the activity log on the right.
 
-TRYMAG Small Magnets 60Pcs, 12x2mm Neodymium Magnets, Tiny Strong Small Round Magnets – this can be purchased for $9.99 at the following link: https://www.amazon.com/TRYMAG-Magnets-Neodymium-Refrigerator-Whiteboard/dp/B0CLZP57FD/ref=sr_1_6?crid=Z915WUNALDZT&dib=eyJ2IjoiMSJ9.lDwRWM83zO8KGI48y_Fh9OdcU2HH7q_dn_wgRNFxGZrRE73s3UrwVE_T2PtMXcBHJXs9vZBDzj5eKWbCvYQMi3bd4t9n3kz4mx-diLIbOrxZfT5oeIjrveO2iS-SYft7XxnmOCLSJdq6cADP8ZyC_J72aow08pmLcemV2XWZaojUqjJ3iu0PwMn6fzDpNZYAuqHMvB-j3R8_eVk3sVODhAcCz_hhjqiEWioUzlHXJGo.0gdPJB8_ETQfY53zps-iSuHfcmOvzVzFxEHqqBNJuO8&dib_tag=se&keywords=12mm+neodymium+magnets&qid=1735872477&sprefix=12mm+neodynium+magnet%2Caps%2C112&sr=8-6
-  
-DIYMAG 120Pcs Refrigerator Magnets 10x2mm Premium Brushed Nickel Small Round Cylinder Fridge Magnet – this can be purchased for $12.99 at the following link: https://www.amazon.com/gp/product/B0753ZPBLQ/ref=ppx_yo_dt_b_search_asin_title?ie=UTF8&psc=1
+IMAGE
+
+##Items
+In the items tab, you will see every item that has been registered as well as the barcode for that item, the purchase link for that item, total quantity, quantity in, quantity out, and percentage available. This is a great place to look if you’re thinking about what items to restock.
+
+IMAGE
+
+##Users
+
+This is where you will see all of the users registered to check in and check out items. It is important to have all users registered here because it is how you can keep track of who has what items. In particular, if you need an item that there are very few of – like force distance sensors in the physics department – and you see that one teacher has many, then it is easy to contact that teacher to inquire about when they will be done using that item.
+
+IMAGE
+
+##ActivityLog
+
+Here you can see the recent interactions with the interface. You can see who is checking out what items. It may also be helpful to see historically when some items are checked out (for example, maybe everyone needs scales around December because they’re needed for calculating forces).
+
+IMAGE
+
+#Actions
+
+There are a total of six actions available through the interface, each of which we will go over below: adding new items, adding new users, removing an item, returning an item, deleting items, and deleting users.
+
+##Adding New Items
+
+Press on the “Add New Item(s)” from the Interface. You can click with a mouse or using a touchscreen. The way to add an item is pretty self-explanatory. Make sure you include the appropriate barcode. This will be recorded in the activity history.
+
+IMAGE
+
+##Adding New Users
+
+Adding a new user is simple. Press on the “Add New User(s)” and enter their details. They will then be available as a user in the dropdown menu to add or take items from the inventory.
+
+IMAGE
+
+##Removing an Item
+
+Click on “Remove Item(s)”. Using the barcode scanner, scan the barcode of the item being removed and then input the quantity and user who is removing. This will be logged as in the activity log.
+
+IMAGE
+
+##Returning an Item
+
+Click on “Return Item(s).” Using the barcode scanner, scan the barcode of the item being removed and then input the quantity and user who is returning. This will be logged in the activity log.
+
+IMAGE
+
+##Deleting Items
+
+IMAGE
+
+##Deleting Users
+
+IMAGE
+
 # Tips
 It is highly recommended to do this on a flat surface that is smooth; for example, doing it on a laminated surface seems to work really well.
 
