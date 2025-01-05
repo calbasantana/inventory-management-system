@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Import Google Icon Font -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!-- Let browser know the website is optimized for mobile -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<style>
+    /* Add custom CSS styles */
+    body {
+        display: flex;
+        min-height: 100vh;
+        flex-direction: column;
+    }
+    main {
+        flex: 1 0 auto;
+    }
+    .footer {
+        text-align: right;
+        margin-top: auto;
+        padding: 20px;
+    }
+</style>
+<body>
+<main>
+    <div class="container">
+        <div class="row">
+            <div class="input-field col s6">
+                <i class="material-icons prefix">account_circle</i>
+                <input id="fn" type="text" class="validate" autofocus>
+                <label for="fn">First Name</label>
+            </div>
+            <div class="input-field col s6">
+                <input id="ln" type="text" class="validate">
+                <label for="ln">Last Name</label>
+            </div>
+            <div class="input-field col s6">
+                <i class="material-icons prefix">email</i>
+                <input id="mail" type="email" class="validate" >
+                <label for="mail">Email</label>
+            </div>
+            <div class="input-field col s6">
+                <i class="material-icons prefix">location_on</i>
+                <input id="loc" type="text" class="validate">
+                <label for="loc">Primary Room Location</label>
+            </div>
+        </div><!-- END ROW -->
+    </div>
+</main>
+<div class="footer">
+    <button class="btn waves-effect waves-light" id="button">ADD
+        <i class="material-icons right">send</i>
+    </button>
+</div>
+
+<!-- Compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script>
+    var firstnameBox = document.getElementById("fn");
+    var lastnameBox = document.getElementById("ln");
+    var emailBox = document.getElementById("mail");
+    var locationBox = document.getElementById("loc");
+    document.getElementById("button").addEventListener("click", addRecord);
+
+    function addRecord() {
+        var first = firstnameBox.value;
+        var last = lastnameBox.value;
+        var email = emailBox.value;
+        var location = locationBox.value;
+        
+        if (first.length === 0 || last.length === 0 || email.length === 0 || location.length === 0) {
+            M.toast({html: 'All fields are required!'})
+        } else {
+            var data = {
+                firstname: firstnameBox.value,
+                lastname: lastnameBox.value,
+                email: emailBox.value,
+                location: locationBox.value
+            };
+
+            // Call the server-side function to add user and log activity
+            google.script.run.withSuccessHandler(function (fullName) {
+                // Function has been successfully triggered in Code.gs
+                google.script.host.close();  // Close the current modal dialog
+            }).addUser(data);
+            
+            firstnameBox.value = "";
+            lastnameBox.value = "";
+            emailBox.value = "";
+            locationBox.value = "";
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        // Autofocus on the First Name input field
+        var firstNameInput = document.getElementById('fn');
+        firstNameInput.focus();
+    });
+</script>
+</body>
+</html>

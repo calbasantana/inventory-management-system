@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <meta charset="UTF-8">
+      <title>select</title>
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  </head>
+  <style>
+        /* Add custom CSS styles */
+        body {
+          display: flex;
+          min-height: 100vh;
+          flex-direction: column;
+        }
+        main {
+          flex: 1 0 auto;
+        }
+        .footer {
+          text-align: right;
+          margin-top: auto;
+          padding: 20px;
+        }
+    </style>
+  <body>
+    <main>
+      <div class="container">
+        <div class="row">
+          <div class="input-field">
+            <select id="userSelect">
+              <option value="" selected disabled>Select User</option>
+              <!-- Options will be dynamically populated from Google Sheets -->
+            </select>
+            <label>Users</label>
+          </div>
+        </div>
+      </div>
+    </main>
+    <div class="footer">
+      <button class="btn waves-effect waves-light red" id="deleteAllButton" onclick="removeUser()">
+        DELETE
+        <i class="material-icons right">delete_forever</i>
+      </button>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        var userSelect = document.getElementById('userSelect');
+
+        // Fetch user data from Google Sheets
+        google.script.run.withSuccessHandler(populateUserDropdown).getUsersDataForRemoveUsers();
+
+        function populateUserDropdown(usersData) {
+          // Populate User dropdown with dynamic options
+          usersData.forEach(function (user) {
+            var option = document.createElement('option');
+            option.value = user[0] + ' ' + user[1]; // Assuming user data is [FirstName, LastName]
+            option.text = user[0] + ' ' + user[1];
+            userSelect.add(option);
+          });
+
+          // Initialize Materialize dropdown
+          M.FormSelect.init(userSelect);
+        }
+      });
+
+      function removeUser() {
+        // Get selected value from the dropdown
+        var userSelect = document.getElementById('userSelect');
+        var selectedUser = userSelect.value;
+
+        if (selectedUser) {
+          // Call the server-side function to remove the selected user and log activity
+          google.script.run.withSuccessHandler(function () {
+            // Reset the dropdown to its initial state
+            userSelect.value = "";
+            M.FormSelect.init(userSelect); // Reinitialize Materialize select
+
+            // Optional: Refresh the dropdown after removal
+            google.script.run.withSuccessHandler(populateUserDropdown).getUsersDataForRemoveUsers();
+          }).removeAndLogUser(selectedUser);
+        } else {
+          M.toast({html: 'Please select a user to delete!'}); // Display an error if no user is selected
+        }
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Import Google Icon Font -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!-- Let browser know the website is optimized for mobile -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<style>
+    /* Add custom CSS styles */
+    body {
+        display: flex;
+        min-height: 100vh;
+        flex-direction: column;
+    }
+    main {
+        flex: 1 0 auto;
+    }
+    .footer {
+        text-align: right;
+        margin-top: auto;
+        padding: 20px;
+    }
+</style>
+<body>
+<main>
+    <div class="container">
+        <div class="row">
+            <input type="hidden" id="itemName">
+            <div class="input-field col s4">
+                <i class="material-icons prefix">reorder</i>
+                <input id="barcode" type="text" class="validate" autofocus>
+                <label for="barcode">Barcode</label>
+            </div>
+            <div class="input-field col s4">
+                <select id="quantitySelect">
+                    <option value="" selected disabled>Select Quantity</option>
+                    <!-- Add other quantity options here -->
+                    <!-- You can dynamically generate options using a loop if needed -->
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="All">All</option>
+                </select>
+                <label>Quantity</label>
+            </div>
+            <div class="input-field col s12">
+              <select id="userSelect">
+                <option value="" selected disabled>Select User</option>
+                <!-- Options will be dynamically populated from Google Sheets -->
+              </select>
+              <label>Deleted By</label>
+            </div>
+        </div>
+    </div>
+</main>
+<div class="footer">
+    <button class="btn waves-effect waves-light" id="deleteButton">DELETE
+        <i class="material-icons right">delete</i>
+    </button>
+    <button class="btn waves-effect waves-light red" id="deleteAllButton">DELETE ALL
+        <i class="material-icons right">delete_forever</i>
+    </button>
+</div><!-- END ROW -->
+
+<!-- Compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script>
+    var barcodeBox = document.getElementById("barcode");
+    var quantitySelect = document.getElementById('quantitySelect');
+    var userBox = document.getElementById("userSelect");
+    document.getElementById("deleteButton").addEventListener("click", deleteRecord);
+    document.getElementById("deleteAllButton").addEventListener("click", deleteAllRecord);
+
+    function deleteRecord() {
+        var barcode = barcodeBox.value;
+        var quantity = quantitySelect.value;
+        var user = userBox.value;
+
+        if (barcode.length === 0 || quantity === null || user === null) {
+            M.toast({html: 'Barcode, quantity, and user are required!'});
+        } else {
+            var data = {
+                barcode: barcode,
+                quantity: quantity,
+                user: user
+            };
+
+            google.script.run.withSuccessHandler(function(message) {
+              showMessage(message);
+              // Clear input fields after successful deletion
+              clearInputFields();
+            }).deleteItem(data);
+
+            google.script.run.withSuccessHandler(updateItemNameDisplay).getItemName(data.barcode);
+        }
+    }
+
+    function deleteAllRecord() {
+        var barcode = barcodeBox.value;
+        var user = userBox.value;
+
+        if (barcode.length === 0 || user === null) {
+            M.toast({html: 'Barcode and user are required!'});
+        } else {
+            var data = {
+                barcode: barcode,
+                user: user
+            };
+
+            google.script.run.withSuccessHandler(function(message) {
+              showMessage(message);
+              // Clear input fields after successful deletion
+              clearInputFields(); // Clears fields after "DELETE ALL"
+            }).deleteAll(data);
+
+            google.script.run.withSuccessHandler(updateItemNameDisplay).getItemName(data.barcode);
+        }
+    }
+
+    function clearInputFields() {
+        barcodeBox.value = "";
+        quantitySelect.value = "";
+        userBox.value = "";
+        M.updateTextFields(); // Update Materialize form fields after clearing
+    }
+
+    function showMessage(message) {
+        M.toast({html: message});
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        var elems = document.querySelectorAll('select');
+        var instances = M.FormSelect.init(elems);
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+        // Autofocus on the barcode input field
+        var barcodeInput = document.getElementById('barcode');
+        barcodeInput.focus();
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
+        var userSelect = document.getElementById('userSelect');
+
+        // Fetch user data from Google Sheets
+        google.script.run.withSuccessHandler(populateUserDropdown).getUsersDataForRemoveUsers();
+
+        function populateUserDropdown(usersData) {
+          // Populate User dropdown with dynamic options
+          usersData.forEach(function (user) {
+            var option = document.createElement('option');
+            option.value = user[0] + ' ' + user[1]; // Assuming user data is [FirstName, LastName]
+            option.text = user[0] + ' ' + user[1];
+            userSelect.add(option);
+          });
+
+          // Initialize Materialize dropdown
+          M.FormSelect.init(userSelect);
+        }
+    });
+</script>
+</body>
+</html>

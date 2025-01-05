@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Import Google Icon Font -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!-- Let browser know the website is optimized for mobile -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<style>
+    /* Add custom CSS styles */
+    body {
+        display: flex;
+        min-height: 100vh;
+        flex-direction: column;
+    }
+    main {
+        flex: 1 0 auto;
+    }
+    .footer {
+        text-align: right;
+        margin-top: auto;
+        padding: 20px;
+    }
+</style>
+<body>
+<main>
+    <div class="container">
+        <div class="row">
+            <div class="input-field col s4">
+                <i class="material-icons prefix">reorder</i>
+                <input id="barcode" type="text" class="validate" autofocus>
+                <label for="barcode">Barcode</label>
+            </div>
+            <div class="input-field col s4">
+                <select id="quantitySelect">
+                    <option value="" selected disabled>Select Quantity</option>
+                    <!-- Add other quantity options here -->
+                    <!-- You can dynamically generate options using a loop if needed -->
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                </select>
+                <label>Quantity</label>
+            </div>
+            <div class="input-field col s12">
+              <select id="userSelect">
+                <option value="" selected disabled>Select User</option>
+                <!-- Options will be dynamically populated from Google Sheets -->
+              </select>
+              <label>Removed By</label>
+            </div>
+        </div>
+    </main>
+    <div class="footer">
+        <button class="btn waves-effect waves-light" id="button">REMOVE
+            <i class="material-icons right">remove</i>
+        </button>
+    </div>
+</div><!-- END ROW -->
+<!-- Compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script>
+    var barcodeBox = document.getElementById("barcode");
+    var quantitySelect = document.getElementById('quantitySelect');
+    document.getElementById("button").addEventListener("click", removeRecord);
+
+    function removeRecord() {
+        var barcode = barcodeBox.value;
+        var quantity = quantitySelect.value;
+
+        if (barcode.length === 0 || quantity === null) {
+            M.toast({html: 'Barcode and quantity are required!'})
+        } else {
+            var data = {
+                barcode: barcode,
+                quantity: quantity
+            };
+
+            // Call the utility function to remove item quantity from "Items" sheet
+            google.script.run.withSuccessHandler(function(itemName) {
+              if (itemName !== null) {
+                // Call the new functions to update Interface sheet and log activity for removing items
+                var userSelect = document.getElementById('userSelect');
+                var fullName = userSelect.value; // Assuming userSelect has the full name of the user
+
+                google.script.run.updateInterfaceSheetForRemove(fullName, quantity, itemName);
+                google.script.run.logActivityForRemove(fullName, quantity, itemName);
+
+                barcodeBox.value = "";
+                quantitySelect.value = "";
+              } else {
+                M.toast({html: 'Item not found or not enough quantity to remove!'})
+              }
+            }).removeQuantity(data);
+        }
+    }
+    document.addEventListener('DOMContentLoaded', function() {
+        var elems = document.querySelectorAll('select');
+        var instances = M.FormSelect.init(elems);
+    });
+        document.addEventListener('DOMContentLoaded', function() {
+            // Autofocus on the First Name input field
+            var firstNameInput = document.getElementById('barcode');
+            firstNameInput.focus();
+        });
+      document.addEventListener('DOMContentLoaded', function () {
+        var userSelect = document.getElementById('userSelect');
+
+        // Fetch user data from Google Sheets
+        google.script.run.withSuccessHandler(populateUserDropdown).getUsersDataForRemoveUsers();
+
+        function populateUserDropdown(usersData) {
+          // Populate User dropdown with dynamic options
+          usersData.forEach(function (user) {
+            var option = document.createElement('option');
+            option.value = user[0] + ' ' + user[1]; // Assuming user data is [FirstName, LastName]
+            option.text = user[0] + ' ' + user[1];
+            userSelect.add(option);
+          });
+
+          // Initialize Materialize dropdown
+          M.FormSelect.init(userSelect);
+        }
+      });
+</script>
+</body>
+</html>

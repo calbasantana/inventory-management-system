@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<style>
+    /* Add custom CSS styles */
+    body {
+        display: flex;
+        min-height: 100vh;
+        flex-direction: column;
+    }
+    main {
+        flex: 1 0 auto;
+    }
+    .footer {
+        text-align: right;
+        margin-top: auto;
+        padding: 20px;
+    }
+    .link-na + label {
+        display: none; /* Hide label when input field has "link-na" class */
+    }
+</style>
+<body>
+<main>
+    <div class="container">
+        <div class="row">
+            <div class="input-field col s6">
+                <i class="material-icons prefix">local_offer</i>
+                <input id="itemName" type="text" class="validate" autofocus>
+                <label for="itemName">Item Name</label>
+            </div>
+            <div class="input-field col s6">
+                <select id="quantitySelect">
+                    <option value="" selected disabled>Select Quantity</option>
+                    <!-- Add other quantity options here -->
+                    <!-- You can dynamically generate options using a loop if needed -->
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                </select>
+                <label>Quantity</label>
+            </div>
+            <div class="input-field col s4">
+                <i class="material-icons prefix">reorder</i>
+                <input id="barcode" type="text" class="validate">
+                <label for="barcode">Barcode</label>
+            </div>
+            <div class="input-field col s6">
+                <i class="material-icons prefix">link</i>
+                <input id="purchaseLink" type="text" class="validate">
+                <label for="purchaseLink">Purchase Link</label>
+            </div>
+            <div class="input-field col s2">
+              <button class="btn waves-effect waves-light" id="linkNAButton">Link N/A</button>
+            </div>
+            <div class="input-field col s12">
+              <select id="userSelect">
+                <option value="" selected disabled>Select User</option>
+                <!-- Options will be dynamically populated from Google Sheets -->
+              </select>
+              <label>Added By</label>
+            </div>
+        </div>
+    </main>
+    <div class="footer">
+        <button class="btn waves-effect waves-light" id="button" onclick="addRecord">ADD
+            <i class="material-icons right">send</i>
+        </button>
+    </div>
+</div><!-- END ROW -->
+<!-- Compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script>
+    var itemNameBox = document.getElementById("itemName");
+    var quantitySelect = document.getElementById('quantitySelect');
+    var barcodeBox = document.getElementById("barcode");
+    var purchaseLinkBox = document.getElementById("purchaseLink");
+    var userBox = document.getElementById("userSelect");
+    document.getElementById("button").addEventListener("click", addRecord);
+
+    function addRecord() {
+        var itemName = itemNameBox.value;
+        var quantity = quantitySelect.value;
+        var barcode = barcodeBox.value;
+        var purchaseLink = purchaseLinkBox.value;
+        var user = userBox.value;
+
+        if (itemName.length === 0 || quantity === null || barcode.length === 0 || purchaseLink.length === 0 || user === null) {
+            M.toast({html: 'All fields are required!'})
+        } else {
+            var data = {
+                itemName: itemNameBox.value,
+                quantity: quantitySelect.value,
+                barcode: barcodeBox.value,
+                purchaseLink: purchaseLinkBox.value
+            };
+            google.script.run.appendItemData(data);
+
+            google.script.run.updateInterfaceSheetForNewItem(user, quantity, itemName);
+            google.script.run.logActivityForNewItem(user, quantity, itemName);
+            
+            itemNameBox.value = "";
+            quantitySelect.value = "";
+            barcodeBox.value = "";
+            purchaseLinkBox.value = "";
+        }
+    }
+    document.addEventListener('DOMContentLoaded', function() {
+        var elems = document.querySelectorAll('select');
+        var instances = M.FormSelect.init(elems);
+    });
+    document.getElementById("linkNAButton").addEventListener("click", setLinkNA);
+
+    function setLinkNA() {
+      purchaseLinkBox.value = "N/A";
+      purchaseLinkBox.classList.add("link-na"); // Add a class to the input field
+    }
+        document.addEventListener('DOMContentLoaded', function() {
+            // Autofocus on the First Name input field
+            var firstNameInput = document.getElementById('itemName');
+            firstNameInput.focus();
+        });
+      document.addEventListener('DOMContentLoaded', function () {
+        var userSelect = document.getElementById('userSelect');
+
+        // Fetch user data from Google Sheets
+        google.script.run.withSuccessHandler(populateUserDropdown).getUsersDataForRemoveUsers();
+
+        function populateUserDropdown(usersData) {
+          // Populate User dropdown with dynamic options
+          usersData.forEach(function (user) {
+            var option = document.createElement('option');
+            option.value = user[0] + ' ' + user[1]; // Assuming user data is [FirstName, LastName]
+            option.text = user[0] + ' ' + user[1];
+            userSelect.add(option);
+          });
+
+          // Initialize Materialize dropdown
+          M.FormSelect.init(userSelect);
+        }
+      });
+</script>
+</body>
+</html>
