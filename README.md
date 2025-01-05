@@ -1,4 +1,4 @@
-IMAGE
+![Image_1](https://github.com/user-attachments/assets/d6d343a5-4c1e-407d-a6c2-29e0284c7360)
 
 # Introduction
 This project came about as a means of trying to solve an issue within the physics and chemistry departments at my high school; namely, the issue of inventory management. We often have a large array of tools that are difficult to track when teachers are taking them from a central location, such as the physics closet or the chemicals storage supply closet of the chemistry department.
@@ -37,34 +37,38 @@ As an example, for Return Item(s), I did the following:
 
 Now, when you click one of the six buttons, you should be able to engage the appropriate script.
 
-# Tabs
-There are four tabs in total: Interface, Items, Users, and ActivityLog. Each tab is pretty self-explanatory.
+## Cleaning Up
+
+To make things look pretty, I highly recommend deleting the white boxes surrounding the main interfaces. For example, columns J-Z and rows 23-1000 in the Interface sheet. I did this prior to taking screenshots for the sheets that follow.
+
+# Sheets
+There are four sheets in total: Interface, Items, Users, and ActivityLog. Each tab is pretty self-explanatory.
 
 ## Interface
 
 The interface is where you should spend most of the time and where your screen should be by default for users. From here, you can either click using a touchscreen (if your device allows for it) or use a mouse. You will see the options on the left for engaging with the inventory management system and the activity log on the right.
 
-![Image_7](https://github.com/user-attachments/assets/a653aa74-a5bf-4028-b0a7-d0ad8d0b1cf1)
+![Image_7](https://github.com/user-attachments/assets/8773a607-61c2-4f6f-ad9e-37d0e340723f)
 
 
 ## Items
-In the items tab, you will see every item that has been registered as well as the barcode for that item, the purchase link for that item, total quantity, quantity in, quantity out, and percentage available. This is a great place to look if you’re thinking about what items to restock.
+In the items tab, you will see every item that has been registered as well as the barcode for that item, the purchase link for that item, total quantity, quantity in, and quantity out. This is a great place to look if you’re thinking about what items to restock.
 
-![Image_8](https://github.com/user-attachments/assets/c23c282c-ce15-4e93-a77d-c29eef05bb14)
+![Image_8](https://github.com/user-attachments/assets/9ded62a7-e3a1-43fe-a7f2-553f59f619c4)
 
 
 ## Users
 
 This is where you will see all of the users registered to check in and check out items. It is important to have all users registered here because it is how you can keep track of who has what items. In particular, if you need an item that there are very few of – like force distance sensors in the physics department – and you see that one teacher has many, then it is easy to contact that teacher to inquire about when they will be done using that item.
 
-![Image_9](https://github.com/user-attachments/assets/314b1f3c-065e-489d-93c0-b209bf641263)
+![Image_9](https://github.com/user-attachments/assets/683cde4c-3ee0-47b2-b890-0c0845298006)
 
 
 ## ActivityLog
 
 Here you can see the recent interactions with the interface. You can see who is checking out what items. It may also be helpful to see historically when some items are checked out (for example, maybe everyone needs scales around December because they’re needed for calculating forces).
 
-![Image_10](https://github.com/user-attachments/assets/c4d862a9-d15a-4253-922a-495b44547ac0)
+![Image_10](https://github.com/user-attachments/assets/96aa7b6d-e098-4146-a9c8-d234b65a405e)
 
 
 # Actions
@@ -112,8 +116,16 @@ Click on "Delete User(s)." Select the user to be deleted from the dropdown menu 
 
 ![Image_16](https://github.com/user-attachments/assets/6f0c177e-32f1-443e-a07c-948b2458acda)
 
+# Hardware
 
+I have only made the software or system itself. However, the hardware is where it can get tricky. The easiest thing to get is a barcode scanner and connecting it to a computer on which the spreadsheet inventory system will run. I recommend something like the following:
+
+NADAMOO Wireless Barcode Scanner with USB Cradle Charging Base 328Ft Long Transmission Handheld 1D Cordless Laser Barcode Reader Portable Bar Code Scanning for Retail Supermaket Warehouse - for $54.99 from: https://www.amazon.com/dp/B06Y2X5HVP/?coliid=I1FH16858D7FF1&colid=1JWCH8PLFICLN&psc=1&ref_=list_c_wl_lv_ov_lig_dp_it
+
+You will also need something to create a barcode label to place on items for easy scanning. There are a ton of affordable options on the market, such as the following.
+
+Phomemo M110 Label Makers - Barcode Label Printer Bluetooth Portable Thermal Printer for Small Business, Address, Logo, Clothing, Mailing, Sticker Printer for Phones & PC, Black  - for 39.99 from: https://www.amazon.com/Phomemo-M110-Label-Maker-Bluetooth-Compatible/dp/B07XXB2MXN/ref=sr_1_4?crid=3W57T236XRDHY&dib=eyJ2IjoiMSJ9.FmpbREQXLHdRIO-xGZpBv7eunP5uPvbw_JOfmrW10z1tSQhdPMU7aySJgAkuhHEkXINX1o2RJz9y4Mp6iWDPnST7ZIKV3Hnnlr2kNVKZXsHDleKb-4MwMPJOK19QPEa7OAzcQk7kXUXs_TtI9HUyv7ZAwSMloyYprN_AgnSP4U99jJBJXCEz2xf0Phacdohw--4JjLZjbN8GuALIzy2uTOuN8L-KKe4xMkzeZus6yWxYlJ_Zx_c0Gz9Q9rt9FfyWnmfBVziG7YI2o4hFMhJOURFdi6whJwGEAuIgf2CYq8nGoGmo9ZwRvystM5pZttnmMhz-2ZpTNMeGpRdwb2x5i86NRNQbWUoQXusXI1OHV4c.uN1qQgvaHpqis0DiLdt_fXO_W8w8GB1op_jKqA27VH4&dib_tag=se&keywords=barcode%2Bmaker&qid=1736113264&s=electronics&sprefix=barcode%2Bmaker%2Celectronics%2C114&sr=1-4&th=1
+
+The hardest part here is creating a barcode for every item and keeping track of it. This inventory system might work best if you're just starting out in a new school and have plenty of time to organize and purchase items and future proof inventory tracking.
 # Tips
-It is highly recommended to do this on a flat surface that is smooth; for example, doing it on a laminated surface seems to work really well.
-
-It is also important to move slowly with the magnet because it does have an uneven magnetic field in the configuration that I have at the moment.
+I recommend trying this out with a small number of items first and making sure that everything works prior to purchasing the barcode scanner and barcode maker. What's great about this solution is that it is highly customizable to your needs, so you can get rid of things you do not need (for example, room number).
